@@ -1,0 +1,20 @@
+.DS_Store
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+
+# Plugin-Binaries (Code/Assets) ignorieren, NUR Plugin-Config (data.json) committen
+.obsidian/plugins/*/main.js
+.obsidian/plugins/*/styles.css
+.obsidian/plugins/*/manifest.json
+.obsidian/plugins/*/LICENSE*
+.obsidian/plugins/*/README*
+.obsidian/plugins/*/CHANGELOG*
+
+*.swp
+*.swo
+.vscode/
+
+# Secrets — Sales-Outreach API-Keys
+.env
+.env.local

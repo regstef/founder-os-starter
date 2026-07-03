@@ -18,7 +18,7 @@ Nicht alle Felder sind immer nötig — AI arbeitet mit dem, was kommt, und frag
 1. **Opener** (1 Satz) — BLUF, stärkster Fakt zuerst (z. B. Cover-Placement schlägt reines "featured in"):
    `The '[Piece]' [Item-Typ] from my [Kollektion] collection is on the cover of @magazine's [Issue] 🖤`
    Alternative wenn kein Cover: `Published in @magazine` / `Thank you, @model, for wearing the '[Piece]'. Featured in @magazine!`
-2. Direkt darunter (keine Leerzeile dazwischen): `Fashionstory: "[Titel]"` + Konzept-Satz (1–2 Sätze, nur was User liefert, nichts erfinden)
+2. Direkt darunter (keine Leerzeile dazwischen): `Fashionstory: "[Titel]"` — nur der Name, kein Konzept-Satz in der Caption (Konzept/Beschreibung wird stattdessen als Blog-Rohmaterial abgelegt, siehe unten)
 3. Leerzeile `.`
 4. `See the full story here:` + `🔗 [link]` (nur wenn Link vorhanden)
 5. Leerzeilen `..`
@@ -37,12 +37,16 @@ Nicht alle Felder sind immer nötig — AI arbeitet mit dem, was kommt, und frag
 - AI liefert die fertige Caption als Fließtext im Chat zum Copy-Paste, plus (Clipboard-Pflicht, siehe `communication.md`) via `pbcopy`-Heredoc in die Zwischenablage — sofern die Session lokal auf macOS läuft. In Cloud-/Remote-Sessions ohne Zugriff auf die macOS-Zwischenablage: Hinweis geben statt pbcopy zu versuchen.
 - Bei fehlenden Pflichtfeldern (Model, Piece, mind. 1 Credit) nachfragen statt platzhalten.
 
-## Beispiel (nutzerbestätigt, 03.07.2026)
+## Fashionstory-Inhalt → Blog-Rohmaterial
+Konzept-/Vision-Text zur Fashionstory (den User mitschickt, z. B. Editorial-Statement) NICHT in der Caption verwenden — nur den Story-Titel. Stattdessen ablegen unter `05_resources/fashionstories/<slug>.md` (Slug wie Story-Titel, kebab-case). Zweck: Rohmaterial für spätere Blogartikel auf der Website.
+
+Inhalt der Datei: Story-Titel, Magazin + Issue, Piece-Name + Kollektion, Team-Credits, Full-Story-Link, Konzept-Text (so wie geliefert, unübersetzt/unausformuliert — Rohmaterial, keine fertige Blog-Prosa). `05_resources/` erlaubt freie Struktur/optionales Frontmatter (siehe `templates.md`).
+
+## Beispiel (nutzerbestätigt, 03.07.2026 — Struktur; Fashionstory-Zeile seither auf Titel-only gekürzt)
 ```
 The 'Circle Transparency' dress from my Social Capital collection is on the cover of @pap_magazine's June 2026 Issue 🖤
 
 Fashionstory: "Trichomatic Devinity"
-A trinity of black, silver, and flesh converges in sculptural ceremony, divinity engineered through texture, repetition, and the disciplined body.
 .
 See the full story here:
 🔗 pap-magazine.com/editorial/trichomatic-devinity

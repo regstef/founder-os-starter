@@ -1,0 +1,39 @@
+{
+  "tasksFolder": "01_tasks/notes",
+  "taskTag": "task",
+  "taskIdentificationMethod": "tag",
+  "storeTitleInFilename": true,
+  "defaultTaskStatus": "open",
+  "defaultTaskPriority": "normal",
+  "customStatuses": [
+    { "id": "open", "value": "open", "label": "Offen", "color": "#808080", "isCompleted": false, "excludeFromCycle": false, "order": 0, "autoArchive": false, "autoArchiveDelay": 5 },
+    { "id": "waiting", "value": "waiting", "label": "Warten", "color": "#cc8800", "isCompleted": false, "excludeFromCycle": false, "order": 1, "autoArchive": false, "autoArchiveDelay": 5 },
+    { "id": "someday", "value": "someday", "label": "Someday", "color": "#8888aa", "isCompleted": false, "excludeFromCycle": false, "order": 2, "autoArchive": false, "autoArchiveDelay": 5 },
+    { "id": "done", "value": "done", "label": "Erledigt", "color": "#00aa00", "isCompleted": true, "excludeFromCycle": false, "order": 3, "autoArchive": true, "autoArchiveDelay": 1440 }
+  ],
+  "customPriorities": [
+    { "id": "none", "value": "none", "label": "Keine", "color": "#cccccc", "weight": 0 },
+    { "id": "low", "value": "low", "label": "Niedrig", "color": "#00aa00", "weight": 1 },
+    { "id": "normal", "value": "normal", "label": "Normal", "color": "#ffaa00", "weight": 2 },
+    { "id": "high", "value": "high", "label": "Hoch", "color": "#ff0000", "weight": 3 }
+  ],
+  "moveArchivedTasks": true,
+  "archiveFolder": "08_archive/tasks",
+  "hideCompletedFromOverdue": true,
+  "enableBases": true,
+  "autoCreateDefaultBasesFiles": false,
+  "commandFileMapping": {
+    "open-tasks-view": "01_tasks/tasks.base",
+    "open-kanban-view": "01_tasks/tasks.base",
+    "open-calendar-view": "01_tasks/kalender.base",
+    "open-advanced-calendar-view": "01_tasks/kalender.base",
+    "open-agenda-view": "01_tasks/kalender.base"
+  },
+  "taskCreationDefaults": {
+    "defaultScheduledDate": "today"
+  },
+  "enableNaturalLanguageInput": true,
+  "nlpLanguage": "de",
+  "starterNoteCreated": true,
+  "lastSeenVersion": "4.13.8"
+}

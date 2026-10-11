@@ -1,0 +1,52 @@
+filters:
+  and:
+    - file.hasTag("task")
+formulas:
+  daysUntilDue: if((due.isEmpty() == false), ((number(date(due)) - number(today())) / 86400000).floor(), null)
+  dueIn: if(due.isEmpty(), "", if(formula.daysUntilDue == 0, "Today", if(formula.daysUntilDue == 1, "1 day", if(formula.daysUntilDue > 1, formula.daysUntilDue + " days", if(formula.daysUntilDue == -1, "1 day overdue", formula.daysUntilDue * -1 + " days overdue")))))
+views:
+  - type: tasknotesCalendar
+    name: 📆 Woche
+    order:
+      - file.name
+      - status
+      - priority
+      - due
+      - scheduled
+      - projects
+    options:
+      showScheduled: true
+      showDue: true
+      showRecurring: true
+      showTimeEntries: false
+      showTimeblocks: true
+      showPropertyBasedEvents: true
+      createDailyNotesFromDateLinks: false
+      calendarView: timeGridWeek
+      customDayCount: 3
+      firstDay: 1
+      slotDuration: 00:30:00
+    calendarView: timeGridWeek
+  - type: tasknotesCalendar
+    name: 📋 Agenda
+    order:
+      - status
+      - priority
+      - due
+      - formula.dueIn
+      - scheduled
+      - projects
+      - contexts
+      - file.tags
+      - blockedBy
+      - file.name
+      - recurrence
+      - complete_instances
+      - file.tasks
+    options:
+      showPropertyBasedEvents: false
+      createDailyNotesFromDateLinks: false
+    calendarView: listWeek
+    startDateProperty: file.ctime
+    listDayCount: 7
+    titleProperty: file.basename

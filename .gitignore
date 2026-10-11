@@ -1,0 +1,23 @@
+.DS_Store
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+
+# Plugin-Code ignorieren, nur Plugin-Config (data.json) committen
+.obsidian/plugins/*/main.js
+.obsidian/plugins/*/styles.css
+.obsidian/plugins/*/manifest.json
+.obsidian/plugins/*/LICENSE*
+.obsidian/plugins/*/README*
+.obsidian/plugins/*/CHANGELOG*
+
+# Lokales von Claude Code
+.claude/settings.local.json
+.claude/worktrees/
+
+# Secrets
+.env
+.env.local
+
+*.swp
+.vscode/

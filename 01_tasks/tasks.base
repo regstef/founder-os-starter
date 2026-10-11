@@ -1,0 +1,91 @@
+filters:
+  and:
+    - file.hasTag("task")
+formulas:
+  priorityWeight: if(priority=="none",0,if(priority=="low",1,if(priority=="normal",2,if(priority=="high",3,999))))
+  daysUntilDue: if(due, ((number(date(due)) - number(today())) / 86400000).floor(), null)
+  daysUntilScheduled: if(scheduled, ((number(date(scheduled)) - number(today())) / 86400000).floor(), null)
+  daysUntilNext: if(due && scheduled, min(formula.daysUntilDue, formula.daysUntilScheduled), if(due, formula.daysUntilDue, formula.daysUntilScheduled))
+  urgencyScore: if(!due && !scheduled, formula.priorityWeight, formula.priorityWeight + max(0, 10 - formula.daysUntilNext))
+  dueDateDisplay: if(!due, "", if(date(due).date() == today(), "Heute", if(date(due).date() == today() + "1d", "Morgen", if(date(due).date() == today() - "1d", "Gestern", if(date(due) < today(), formula.daysUntilDue * -1 + " T. drüber", if(date(due) <= today() + "7d", date(due).format("ddd"), date(due).format("DD.MM.")))))))
+properties:
+  file.name:
+    displayName: Aufgabe
+  status:
+    displayName: Status
+  priority:
+    displayName: Prio
+  due:
+    displayName: Fällig
+  scheduled:
+    displayName: Geplant
+  projects:
+    displayName: Projekt
+  dateCreated:
+    displayName: Seit
+  formula.dueDateDisplay:
+    displayName: Fällig in
+views:
+  - type: tasknotesTaskList
+    name: 🔥 Jetzt
+    filters:
+      and:
+        - status == "open"
+        - or:
+            - and:
+                - due.isEmpty() == false
+                - date(due).format("YYYY-MM-DD") <= today().format("YYYY-MM-DD")
+            - and:
+                - scheduled.isEmpty() == false
+                - date(scheduled).format("YYYY-MM-DD") <= today().format("YYYY-MM-DD")
+    order:
+      - file.name
+      - priority
+      - formula.dueDateDisplay
+      - scheduled
+      - projects
+    sort:
+      - property: formula.urgencyScore
+        direction: DESC
+  - type: tasknotesKanban
+    name: 🗂 Board
+    groupBy:
+      property: status
+      direction: ASC
+    order:
+      - file.name
+      - priority
+      - due
+      - scheduled
+      - projects
+    sort:
+      - property: formula.urgencyScore
+        direction: DESC
+    options:
+      columnWidth: 280
+      hideEmptyColumns: false
+  - type: tasknotesTaskList
+    name: ⏳ Warten
+    filters:
+      and:
+        - status == "waiting"
+    order:
+      - file.name
+      - scheduled
+      - dateCreated
+      - projects
+    sort:
+      - property: scheduled
+        direction: ASC
+  - type: tasknotesTaskList
+    name: 💤 Someday
+    filters:
+      and:
+        - status == "someday"
+    order:
+      - file.name
+      - dateCreated
+      - projects
+    sort:
+      - property: dateCreated
+        direction: ASC
